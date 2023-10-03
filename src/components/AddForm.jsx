@@ -4,6 +4,7 @@ export default function AddForm({ tasks, setTasks }) {
   const [addInputValue, setAddInputValue] = useState("");
   const submitHandler = e => {
     e.preventDefault();
+    if (addInputValue === "") return alert("no empty tasks");
     setTasks(prevValue => {
       return [...prevValue, { id: crypto.randomUUID(), title: addInputValue }];
     });

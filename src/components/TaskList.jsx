@@ -3,7 +3,7 @@ import Task from "./Task";
 export default function TaskList({ tasks, filteredTasks, setTasks }) {
   return (
     <ul>
-      {tasks.map(task => {
+      {filteredTasks.map(task => {
         return (
           <Task
             key={task.id}
@@ -11,7 +11,6 @@ export default function TaskList({ tasks, filteredTasks, setTasks }) {
             title={task.title}
             setTasks={setTasks}
             tasks={tasks}
-            filteredTasks={filteredTasks}
           />
         );
       })}

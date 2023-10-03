@@ -1,4 +1,4 @@
-export default function Task({ id, title, setTasks, tasks, filteredTasks }) {
+export default function Task({ id, title, setTasks, tasks }) {
   const deleteTask = id => {
     setTasks(
       tasks.filter(task => {
