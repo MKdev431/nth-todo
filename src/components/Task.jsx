@@ -1,10 +1,16 @@
-export default function Task({ title, deleteTask, id }) {
+export default function Task({ id, title, setTasks, tasks, filteredTasks }) {
+  const deleteTask = id => {
+    setTasks(
+      tasks.filter(task => {
+        if (task.id !== id) {
+          return task;
+        }
+      })
+    );
+  };
   return (
     <>
-      <li
-      // key={id}
-      // id={id}
-      >
+      <li>
         {title}
         <button
           onClick={() => deleteTask(id)}

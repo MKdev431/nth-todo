@@ -1,15 +1,6 @@
 import Task from "./Task";
 
-export default function TaskList({ tasks, setTasks }) {
-  const deleteTask = id => {
-    setTasks(
-      tasks.filter(task => {
-        if (task.id !== id) {
-          return task;
-        }
-      })
-    );
-  };
+export default function TaskList({ tasks, filteredTasks, setTasks }) {
   return (
     <ul>
       {tasks.map(task => {
@@ -18,7 +9,9 @@ export default function TaskList({ tasks, setTasks }) {
             key={task.id}
             id={task.id}
             title={task.title}
-            deleteTask={deleteTask}
+            setTasks={setTasks}
+            tasks={tasks}
+            filteredTasks={filteredTasks}
           />
         );
       })}
