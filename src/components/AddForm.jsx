@@ -5,10 +5,11 @@ export default function AddForm({ tasks, setTasks }) {
   const submitHandler = e => {
     e.preventDefault();
     setTasks(prevValue => {
-      return [...prevValue, { id: crypto.randomUUID() }];
+      return [...prevValue, { id: crypto.randomUUID(), title: addInputValue }];
     });
+    setAddInputValue("");
   };
-  console.log(tasks);
+
   return (
     <form onSubmit={submitHandler}>
       <label>Add task</label>
@@ -18,7 +19,7 @@ export default function AddForm({ tasks, setTasks }) {
         className="add-input"
         type="text"
       />
-      <button>Add task</button>
+      <button className="add-task-btn">Add task</button>
     </form>
   );
 }

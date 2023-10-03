@@ -19,7 +19,10 @@ function App() {
         setTasks={setTasks}
       />
       <h2>tasks:</h2>
-      <TaskList tasks={tasks} />
+      <TaskList
+        tasks={tasks}
+        setTasks={setTasks}
+      />
     </div>
   );
 }

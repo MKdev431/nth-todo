@@ -6,7 +6,7 @@
 }
 
 form {
-  text-align: center;
+  /* text-align: center; */
 }
 
 input {
@@ -25,7 +25,7 @@ input:focus {
   margin-right: 10px;
 }
 
-button {
+.add-task-btn {
   background-color: rgb(10, 215, 10);
   border: none;
   border-radius: 5px;
