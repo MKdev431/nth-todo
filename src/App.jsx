@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 import AddForm from "./components/AddForm";
 import TaskList from "./components/TaskList";
@@ -7,9 +7,11 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [query, setQuery] = useState("");
 
-  const filteredTasks = tasks.filter(task => {
-    return task.title.toLowerCase().includes(query.toLowerCase());
-  });
+  const filteredTasks = useMemo(() => {
+    return tasks.filter(task => {
+      return task.title.toLowerCase().includes(query.toLowerCase());
+    });
+  }, [tasks, query]);
 
   return (
     <div className="app">
