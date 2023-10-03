@@ -1,11 +1,21 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import AddForm from "./components/AddForm";
 import TaskList from "./components/TaskList";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const localValue = localStorage.getItem("ITEMS");
+    if (localValue == null) return [];
+
+    return JSON.parse(localValue);
+  });
+
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(tasks));
+  }, [tasks]);
 
   const filteredTasks = useMemo(() => {
     return tasks.filter(task => {
