@@ -11,8 +11,6 @@ function App() {
     return task.title.toLowerCase().includes(query.toLowerCase());
   });
 
-  console.log(filteredTasks);
-
   return (
     <div className="app">
       <h1>To-do list</h1>
