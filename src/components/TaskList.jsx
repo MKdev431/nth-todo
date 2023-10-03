@@ -9,6 +9,7 @@ export default function TaskList({ tasks, filteredTasks, setTasks }) {
             key={task.id}
             id={task.id}
             title={task.title}
+            completed={task.completed}
             setTasks={setTasks}
             tasks={tasks}
           />

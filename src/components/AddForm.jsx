@@ -8,7 +8,7 @@ export default function AddForm({ setTasks }) {
     const inputValue = inputRef.current.value;
     if (inputValue === "") return alert("no empty tasks");
     setTasks(currentValue => {
-      return [...currentValue, { id: crypto.randomUUID(), title: inputValue }];
+      return [...currentValue, { id: crypto.randomUUID(), title: inputValue, completed: false }];
     });
     inputRef.current.value = "";
   };

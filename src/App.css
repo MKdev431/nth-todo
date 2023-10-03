@@ -9,7 +9,8 @@ form {
   /* text-align: center; */
 }
 
-input {
+.add-input,
+.search-input {
   border: none;
   background-color: #5bb4e8;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
@@ -17,7 +18,8 @@ input {
   margin-left: 10px;
 }
 
-input:focus {
+.add-input:focus,
+.search-input:focus {
   outline: 2px solid blue;
 }
 
@@ -33,6 +35,27 @@ input:focus {
   cursor: pointer;
 }
 
+.delete-btn {
+  margin-left: 5px;
+}
+
 ul {
   list-style: none;
+  text-align: left;
+}
+
+.task {
+  color: #fff;
+  margin-left: 50%;
+  transform: translateX(-20%);
+}
+
+.task:has(input:checked) {
+  color: #bbb;
+  text-decoration: line-through;
+}
+
+.task input {
+  margin-right: 5px;
+  cursor: pointer;
 }
