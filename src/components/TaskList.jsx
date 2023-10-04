@@ -1,6 +1,6 @@
 import Task from "./Task";
 
-export default function TaskList({ tasks, filteredTasks, setTasks }) {
+export default function TaskList({ filteredTasks, toggleTask, deleteTask }) {
   return (
     <ul>
       {filteredTasks.map(task => {
@@ -10,8 +10,8 @@ export default function TaskList({ tasks, filteredTasks, setTasks }) {
             id={task.id}
             title={task.title}
             completed={task.completed}
-            setTasks={setTasks}
-            tasks={tasks}
+            toggleTask={toggleTask}
+            deleteTask={deleteTask}
           />
         );
       })}

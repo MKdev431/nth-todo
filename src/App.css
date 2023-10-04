@@ -16,6 +16,10 @@ form {
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
   margin-block: 20px;
   margin-left: 10px;
+  &::placeholder {
+    color: rgb(203, 38, 38);
+    padding-left: 5px;
+  }
 }
 
 .add-input:focus,

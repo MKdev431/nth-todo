@@ -1,23 +1,21 @@
-import { useRef } from "react";
+import { useState } from "react";
 
-export default function AddForm({ setTasks }) {
-  const inputRef = useRef();
+export default function AddForm({ addTask }) {
+  const [newTask, setNewTask] = useState("");
 
   const submitHandler = e => {
     e.preventDefault();
-    const inputValue = inputRef.current.value;
-    if (inputValue === "") return alert("no empty tasks");
-    setTasks(currentValue => {
-      return [...currentValue, { id: crypto.randomUUID(), title: inputValue, completed: false }];
-    });
-    inputRef.current.value = "";
+    if (newTask === "") return alert("no empty tasks");
+    addTask(newTask);
+    setNewTask("");
   };
 
   return (
     <form onSubmit={submitHandler}>
-      <label>Add task</label>
       <input
-        ref={inputRef}
+        value={newTask}
+        placeholder="Enter task"
+        onChange={e => setNewTask(e.target.value)}
         className="add-input"
         type="text"
       />

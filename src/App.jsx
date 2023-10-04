@@ -23,25 +23,51 @@ function App() {
     });
   }, [tasks, query]);
 
+  const addTask = title => {
+    setTasks(currentValue => {
+      return [...currentValue, { id: crypto.randomUUID(), title, completed: false }];
+    });
+  };
+
+  const deleteTask = id => {
+    setTasks(
+      tasks.filter(task => {
+        if (task.id !== id) {
+          return task;
+        }
+      })
+    );
+  };
+
+  const toggleTask = (id, completed) => {
+    setTasks(currentValue => {
+      return currentValue.map(task => {
+        if (task.id === id) {
+          return { ...task, completed };
+        }
+        return task;
+      });
+    });
+  };
+
   return (
     <div className="app">
       <h1>To-do list</h1>
-      <label>Search tasks</label>
       <input
         value={query}
+        placeholder="Search tasks"
         onChange={e => setQuery(e.target.value)}
         className="search-input"
         type="search"
       />
-      <AddForm
-        tasks={tasks}
-        setTasks={setTasks}
-      />
+      <AddForm addTask={addTask} />
       {tasks.length ? <h2>tasks:</h2> : "no tasks"}
       <TaskList
         tasks={tasks}
         filteredTasks={filteredTasks}
         setTasks={setTasks}
+        toggleTask={toggleTask}
+        deleteTask={deleteTask}
       />
     </div>
   );
