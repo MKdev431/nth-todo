@@ -1,4 +1,4 @@
-export default function Task({ id, title, completed, toggleTask, deleteTask }) {
+export default function Task({ id, title, completed, toggleTask, deleteTask, editTask }) {
   return (
     <>
       <li className="task">
@@ -14,7 +14,7 @@ export default function Task({ id, title, completed, toggleTask, deleteTask }) {
         >
           delete
         </button>
-        <button>Edit task</button>
+        <button onClick={() => editTask(title, id)}>Edit</button>
       </li>
     </>
   );

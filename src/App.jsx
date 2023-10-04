@@ -1,9 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import AddForm from "./components/AddForm";
 import TaskList from "./components/TaskList";
 
 function App() {
+  const [newTask, setNewTask] = useState("");
+  const [editFlag, setEditFlag] = useState(false);
+  const [editId, setEditId] = useState(0);
+  const inputFocusRef = useRef();
   const [tasks, setTasks] = useState(() => {
     const localValue = localStorage.getItem("ITEMS");
     if (localValue == null) return [];
@@ -23,10 +27,26 @@ function App() {
     });
   }, [tasks, query]);
 
-  const addTask = title => {
-    setTasks(currentValue => {
-      return [...currentValue, { id: crypto.randomUUID(), title, completed: false }];
-    });
+  const submitHandler = e => {
+    e.preventDefault();
+    if (newTask === "") return alert("no empty tasks");
+
+    if (editFlag) {
+      setTasks(currentValue => {
+        return [...currentValue, { id: crypto.randomUUID(), title: newTask, completed: false }];
+      });
+    } else {
+      setEditFlag(!editFlag);
+      setTasks(currentValue => {
+        return currentValue.map(task => {
+          if (task.id === editId) {
+            return { ...task, title: newTask };
+          }
+          return task;
+        });
+      });
+    }
+    setNewTask("");
   };
 
   const deleteTask = id => {
@@ -50,6 +70,13 @@ function App() {
     });
   };
 
+  const editTask = (title, id) => {
+    setEditFlag(!editFlag);
+    setNewTask(title);
+    setEditId(id);
+    inputFocusRef.current.focus();
+  };
+
   return (
     <div className="app">
       <h1>To-do list</h1>
@@ -60,7 +87,13 @@ function App() {
         className="search-input"
         type="search"
       />
-      <AddForm addTask={addTask} />
+      <AddForm
+        submitHandler={submitHandler}
+        newTask={newTask}
+        setNewTask={setNewTask}
+        editFlag={editFlag}
+        inputFocusRef={inputFocusRef}
+      />
       {tasks.length ? <h2>tasks:</h2> : "no tasks"}
       <TaskList
         tasks={tasks}
@@ -68,6 +101,7 @@ function App() {
         setTasks={setTasks}
         toggleTask={toggleTask}
         deleteTask={deleteTask}
+        editTask={editTask}
       />
     </div>
   );
