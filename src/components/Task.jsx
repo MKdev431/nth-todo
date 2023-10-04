@@ -14,6 +14,7 @@ export default function Task({ id, title, completed, toggleTask, deleteTask }) {
         >
           delete
         </button>
+        <button>Edit task</button>
       </li>
     </>
   );
