@@ -85,35 +85,37 @@ function App() {
     inputFocusRef.current.focus();
   };
   return (
-    <div className="app">
+    <div className="app-container">
       <h1>To-do list</h1>
-      <div className="select">
-        <select
-          value={selectValue}
-          onChange={e => setSelectValue(e.target.value)}
-          name="tasks"
-        >
-          <option value="all">All</option>
-          <option value="uncompleted">Uncompleted</option>
-          <option value="completed">Completed</option>
-        </select>
+      <div className="app">
+        <div className="select">
+          <select
+            value={selectValue}
+            onChange={e => setSelectValue(e.target.value)}
+            name="tasks"
+          >
+            <option value="all">All</option>
+            <option value="uncompleted">Uncompleted</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        <AddForm
+          submitHandler={submitHandler}
+          newTask={newTask}
+          setNewTask={setNewTask}
+          editFlag={editFlag}
+          inputFocusRef={inputFocusRef}
+        />
+        {tasks.length ? <h2>tasks:</h2> : "no tasks"}
+        <TaskList
+          tasks={tasks}
+          setTasks={setTasks}
+          toggleTask={toggleTask}
+          deleteTask={deleteTask}
+          editTask={editTask}
+          filteredTasks={filteredTasks}
+        />
       </div>
-      <AddForm
-        submitHandler={submitHandler}
-        newTask={newTask}
-        setNewTask={setNewTask}
-        editFlag={editFlag}
-        inputFocusRef={inputFocusRef}
-      />
-      {tasks.length ? <h2>tasks:</h2> : "no tasks"}
-      <TaskList
-        tasks={tasks}
-        setTasks={setTasks}
-        toggleTask={toggleTask}
-        deleteTask={deleteTask}
-        editTask={editTask}
-        filteredTasks={filteredTasks}
-      />
     </div>
   );
 }
