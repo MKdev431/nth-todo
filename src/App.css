@@ -3,7 +3,7 @@
   flex-direction: column;
   background: linear-gradient(to right bottom, #c320c8, #2919df);
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   justify-content: center;
@@ -11,59 +11,53 @@
 }
 
 .app {
+  display: flex;
+  flex-direction: column;
   background-color: #12343b;
   box-shadow: 3px 6px 40px #000;
-  min-width: 450px;
+  width: 450px;
   min-height: 650px;
+  border-radius: 10px;
+  padding-inline: 25px;
+  padding-block: 35px;
 }
 
-form {
-  /* text-align: center; */
+h1 {
+  margin-bottom: 30px;
+  color: rgb(0, 255, 0);
 }
 
-.add-input,
-.search-input {
-  border: none;
-  background-color: #5bb4e8;
-  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
-  margin-block: 20px;
-  margin-left: 10px;
+h2 {
+  color: #fff;
+}
+
+.input {
+  margin-right: 10px;
+  font-size: 20px;
   &::placeholder {
-    color: rgb(203, 38, 38);
-    padding-left: 5px;
+    text-align: center;
   }
 }
 
-.add-input:focus,
-.search-input:focus {
-  outline: 2px solid blue;
+.input:focus {
+  outline: 2px solid rgb(16, 223, 16);
 }
 
-.add-input {
-  margin-right: 10px;
-}
-
-.add-task-btn {
-  background-color: rgb(10, 215, 10);
-  border: none;
-  border-radius: 5px;
-  padding: 2px 2px;
+.add-btn,
+.edit-input-btn {
+  color: rgb(253, 170, 3);
   cursor: pointer;
-}
-
-.delete-btn {
-  margin-left: 5px;
 }
 
 ul {
   list-style: none;
-  text-align: left;
 }
 
-.task {
-  color: #fff;
-  margin-left: 50%;
-  transform: translateX(-20%);
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
 }
 
 .task:has(input:checked) {
@@ -71,16 +65,51 @@ ul {
   text-decoration: line-through;
 }
 
-.task input {
-  margin-right: 5px;
-  cursor: pointer;
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  color: #fff;
+  margin-block: 10px;
+  border-radius: 10px;
+  background-color: green;
+  padding-block: 3px;
+  padding-inline: 8px;
 }
 
 .select-wrapper {
-  text-align: center;
-  width: 100%;
+  margin-left: 55px;
+  align-self: start;
+  margin-block: 10px;
 }
 
-.select-wrapper > * {
-  width: 10%;
+select {
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+select:focus {
+  outline: 2px solid rgb(16, 223, 16);
+}
+
+.delete-btn,
+.edit-btn {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.checkbox {
+  height: 25px;
+  width: 25px;
+}
+
+.checkbox:focus {
+  outline: 2px solid rgb(16, 223, 16);
+}
+
+.icons-wrapper {
+  display: flex;
 }

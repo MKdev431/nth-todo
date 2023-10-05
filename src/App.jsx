@@ -86,9 +86,16 @@ function App() {
   };
   return (
     <div className="app-container">
-      <h1>To-do list</h1>
+      <h1>To-do List</h1>
       <div className="app">
-        <div className="select">
+        <AddForm
+          submitHandler={submitHandler}
+          newTask={newTask}
+          setNewTask={setNewTask}
+          editFlag={editFlag}
+          inputFocusRef={inputFocusRef}
+        />
+        <div className="select-wrapper">
           <select
             value={selectValue}
             onChange={e => setSelectValue(e.target.value)}
@@ -99,14 +106,7 @@ function App() {
             <option value="completed">Completed</option>
           </select>
         </div>
-        <AddForm
-          submitHandler={submitHandler}
-          newTask={newTask}
-          setNewTask={setNewTask}
-          editFlag={editFlag}
-          inputFocusRef={inputFocusRef}
-        />
-        {tasks.length ? <h2>tasks:</h2> : "no tasks"}
+        {tasks.length ? <h2>tasks:</h2> : <h2>No tasks</h2>}
         <TaskList
           tasks={tasks}
           setTasks={setTasks}

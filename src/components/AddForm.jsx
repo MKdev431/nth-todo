@@ -1,3 +1,6 @@
+import { BsFillPlusSquareFill } from "react-icons/bs";
+import { RiEditBoxFill } from "react-icons/ri";
+
 export default function AddForm({ submitHandler, setNewTask, newTask, editFlag, inputFocusRef }) {
   return (
     <form onSubmit={submitHandler}>
@@ -6,10 +9,20 @@ export default function AddForm({ submitHandler, setNewTask, newTask, editFlag, 
         ref={inputFocusRef}
         placeholder="Enter task"
         onChange={e => setNewTask(e.target.value)}
-        className="add-input"
+        className="input"
         type="text"
       />
-      <button className="add-task-btn">{editFlag ? "Add task" : "update task"}</button>
+      {editFlag ? (
+        <BsFillPlusSquareFill
+          onClick={submitHandler}
+          className="add-btn"
+        />
+      ) : (
+        <RiEditBoxFill
+          onClick={submitHandler}
+          className="edit-input-btn"
+        />
+      )}
     </form>
   );
 }
