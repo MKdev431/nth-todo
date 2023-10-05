@@ -63,3 +63,12 @@ ul {
   margin-right: 5px;
   cursor: pointer;
 }
+
+.select-wrapper {
+  text-align: center;
+  width: 100%;
+}
+
+.select-wrapper > * {
+  width: 10%;
+}

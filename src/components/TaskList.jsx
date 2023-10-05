@@ -1,6 +1,6 @@
 import Task from "./Task";
 
-export default function TaskList({ filteredTasks, toggleTask, deleteTask, editTask }) {
+export default function TaskList({ toggleTask, deleteTask, editTask, tasks, filteredTasks }) {
   return (
     <ul>
       {filteredTasks.map(task => {

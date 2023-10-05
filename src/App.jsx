@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import AddForm from "./components/AddForm";
 import TaskList from "./components/TaskList";
@@ -7,6 +7,8 @@ function App() {
   const [newTask, setNewTask] = useState("");
   const [editFlag, setEditFlag] = useState(false);
   const [editId, setEditId] = useState(0);
+  const [selectValue, setSelectValue] = useState("all");
+  const [filteredTasks, setFilteredTasks] = useState([]);
   const inputFocusRef = useRef();
   const [tasks, setTasks] = useState(() => {
     const localValue = localStorage.getItem("ITEMS");
@@ -15,17 +17,23 @@ function App() {
     return JSON.parse(localValue);
   });
 
-  const [query, setQuery] = useState("");
+  useEffect(() => {
+    setFilteredTasks(
+      tasks.filter(task => {
+        if (selectValue === "all") {
+          return task;
+        } else if (selectValue === "completed" && task.completed) {
+          return task;
+        } else if (selectValue === "uncompleted" && !task.completed) {
+          return task;
+        }
+      })
+    );
+  }, [tasks, selectValue]);
 
   useEffect(() => {
     localStorage.setItem("ITEMS", JSON.stringify(tasks));
   }, [tasks]);
-
-  const filteredTasks = useMemo(() => {
-    return tasks.filter(task => {
-      return task.title.toLowerCase().includes(query.toLowerCase());
-    });
-  }, [tasks, query]);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -80,13 +88,16 @@ function App() {
   return (
     <div className="app">
       <h1>To-do list</h1>
-      <input
-        value={query}
-        placeholder="Search tasks"
-        onChange={e => setQuery(e.target.value)}
-        className="search-input"
-        type="search"
-      />
+      <div className="select">
+        <select
+          onChange={e => setSelectValue(e.target.value)}
+          name="tasks"
+        >
+          <option value="all">All</option>
+          <option value="uncompleted">Uncompleted</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
       <AddForm
         submitHandler={submitHandler}
         newTask={newTask}
@@ -97,11 +108,11 @@ function App() {
       {tasks.length ? <h2>tasks:</h2> : "no tasks"}
       <TaskList
         tasks={tasks}
-        filteredTasks={filteredTasks}
         setTasks={setTasks}
         toggleTask={toggleTask}
         deleteTask={deleteTask}
         editTask={editTask}
+        filteredTasks={filteredTasks}
       />
     </div>
   );
