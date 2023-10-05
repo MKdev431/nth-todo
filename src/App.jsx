@@ -5,7 +5,7 @@ import TaskList from "./components/TaskList";
 
 function App() {
   const [newTask, setNewTask] = useState("");
-  const [editFlag, setEditFlag] = useState(false);
+  const [editFlag, setEditFlag] = useState(true);
   const [editId, setEditId] = useState(0);
   const [selectValue, setSelectValue] = useState("all");
   const [filteredTasks, setFilteredTasks] = useState([]);
@@ -84,12 +84,12 @@ function App() {
     setEditId(id);
     inputFocusRef.current.focus();
   };
-
   return (
     <div className="app">
       <h1>To-do list</h1>
       <div className="select">
         <select
+          value={selectValue}
           onChange={e => setSelectValue(e.target.value)}
           name="tasks"
         >
